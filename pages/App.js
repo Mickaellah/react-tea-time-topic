@@ -1,9 +1,15 @@
 import React from 'react';
+import TopicLists from "../Components/TopicLists";
 import Form from "../Components/Form"
 import "../styles.css";
 
-export default function App() {
+function App() {
     return (
-        <Form />
+        <main>
+            <Form />
+            <TopicLists />
+        </main>
     )
 }
+
+export default App
