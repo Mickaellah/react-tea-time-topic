@@ -1,0 +1,33 @@
+body {
+    max-width: 1114px;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    background-color: aliceblue;
+}
+
+.add_form {
+    background-color: white;
+    padding: 32px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.add_input {
+    padding-inline: 46px;
+    padding-block: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+
+.submit_bttn {
+    border: none;
+    border-radius: 5px;
+    padding: 16px;
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+}
+
+/*# sourceMappingURL=/react-tea-time-topic.e31bb0bc.css.map */
