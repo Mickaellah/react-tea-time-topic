@@ -29917,7 +29917,6 @@ function Topics({
     className: "content"
   }, /*#__PURE__*/_react.default.createElement("p", null, topic.title), /*#__PURE__*/_react.default.createElement("button", {
     className: "archive",
-    onClick: handleDelete,
     type: "button",
     id: topic.id
   }, topic.discussedOn == "" ? /*#__PURE__*/_react.default.createElement("img", {
@@ -29967,10 +29966,12 @@ function TopicLists() {
   (0, _react.useEffect)(() => {
     fetchTopic();
   }, []);
-
-  function UpVoteIncreament() {}
-
-  const nextTeaTopic = topics.filter(topic => !topic.discussedOn);
+  let nextTeaTopic = topics.filter(topic => !topic.discussedOn);
+  nextTeaTopic = nextTeaTopic.sort((topicX, topicY) => {
+    const ratioX = topicX.upvotes - topicX.downvotes;
+    const ratioY = topicY.upvotes - topicY.downvotes;
+    return ratioY - ratioX;
+  });
   const prevTopic = topics.filter(topic => topic.discussedOn);
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "Next topics")), nextTeaTopic.map(topic => {
     return /*#__PURE__*/_react.default.createElement(_NextTopics.default, {

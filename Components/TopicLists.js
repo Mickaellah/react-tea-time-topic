@@ -19,11 +19,12 @@ function TopicLists() {
         fetchTopic();
     }, [])
 
-    function UpVoteIncreament() {
-
-    }
-
-    const nextTeaTopic = topics.filter((topic) => !topic.discussedOn);
+    let nextTeaTopic = topics.filter((topic) => !topic.discussedOn);
+    nextTeaTopic = nextTeaTopic.sort((topicX, topicY) => {
+        const ratioX = topicX.upvotes - topicX.downvotes;
+        const ratioY = topicY.upvotes - topicY.downvotes;
+        return ratioY - ratioX;
+    })
     const prevTopic = topics.filter((topic) => topic.discussedOn);
 
     return (
