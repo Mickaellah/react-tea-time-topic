@@ -29918,6 +29918,7 @@ function Topics(props) {
     src: _archive.default,
     alt: "archive"
   }) : /*#__PURE__*/_react.default.createElement("img", {
+    id: props.id,
     src: _trash.default,
     alt: "Delete"
   }), " ")), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, original_date)));
@@ -29971,7 +29972,6 @@ function TopicLists() {
 
   function downVotesIncreament(e) {
     const id = e.target.id;
-    console.log(e.target.id);
     const findId = topics.find(item => item.id === id);
     const downVotes = findId.downvotes++;
     setCount(downVotes);

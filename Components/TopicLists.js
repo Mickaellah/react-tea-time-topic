@@ -27,7 +27,6 @@ function TopicLists() {
 
     function downVotesIncreament(e) {
         const id = e.target.id;
-        console.log(e.target.id);
         const findId = topics.find(item => item.id === id);
         const downVotes = findId.downvotes++;
         setCount(downVotes);
