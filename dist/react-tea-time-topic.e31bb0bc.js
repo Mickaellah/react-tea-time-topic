@@ -29772,51 +29772,7 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"Components/TopicLists.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function TopicLists() {
-  const [topics, setTopics] = (0, _react.useState)([]);
-  (0, _react.useEffect)(async () => {
-    const res = await fetch("https://gist.githubusercontent.com/Pinois/93afbc4a061352a0c70331ca4a16bb99/raw/6da767327041de13693181c2cb09459b0a3657a1/topics.json");
-    const data = await res.json();
-    setTopics(data);
-  }, []);
-  return /*#__PURE__*/_react.default.createElement("section", null, topics.map(topic => {
-    /*#__PURE__*/
-    _react.default.createElement("article", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, console.log(topic.title)), /*#__PURE__*/_react.default.createElement("button", {
-      type: "button",
-      id: console.log(topic.id)
-    })), /*#__PURE__*/_react.default.createElement("div", {
-      class: "buttons"
-    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
-      class: "up_vote",
-      type: "button"
-    }), /*#__PURE__*/_react.default.createElement("div", {
-      class: "upvote_score"
-    }, "Like: ", console.log(topic.upvotes))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
-      class: "down_vote",
-      type: "button"
-    }), /*#__PURE__*/_react.default.createElement("div", {
-      class: "downvote_score"
-    }, "Dislike: ", console.log(topic.downvotes)))));
-  }));
-}
-
-var _default = TopicLists;
-exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"Components/Form.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"Components/Form.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29845,7 +29801,89 @@ function Form() {
     type: "submit"
   }, "Submit")));
 }
-},{"react":"node_modules/react/index.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"icons/archive.svg":[function(require,module,exports) {
+module.exports = "/archive.2f7c54b1.svg";
+},{}],"icons/thumbUp.svg":[function(require,module,exports) {
+module.exports = "/thumbUp.407aa238.svg";
+},{}],"icons/thumbDown.svg":[function(require,module,exports) {
+module.exports = "/thumbDown.537664e5.svg";
+},{}],"icons/trash.svg":[function(require,module,exports) {
+module.exports = "/trash.e2762dec.svg";
+},{}],"Components/TopicLists.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _archive = _interopRequireDefault(require("../icons/archive.svg"));
+
+var _thumbUp = _interopRequireDefault(require("../icons/thumbUp.svg"));
+
+var _thumbDown = _interopRequireDefault(require("../icons/thumbDown.svg"));
+
+var _trash = _interopRequireDefault(require("../icons/trash.svg"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+const Topic_url = "https://gist.githubusercontent.com/Pinois/93afbc4a061352a0c70331ca4a16bb99/raw/6da767327041de13693181c2cb09459b0a3657a1/topics.json";
+
+function TopicLists() {
+  const [topics, setTopics] = (0, _react.useState)([]);
+  console.log(topics);
+
+  async function fetchTopic() {
+    const res = await fetch(Topic_url);
+    const data = await res.json();
+    setTopics(data);
+    console.log(data);
+  }
+
+  (0, _react.useEffect)(() => {
+    fetchTopic();
+  }, []);
+  return /*#__PURE__*/_react.default.createElement("div", null, topics.map(topic => {
+    /*#__PURE__*/
+    _react.default.createElement("article", {
+      key: topic.id
+    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, console.log(topic.title)), /*#__PURE__*/_react.default.createElement("button", {
+      type: "button",
+      id: console.log(topic.id)
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: _archive.default,
+      alt: "archive"
+    }))), /*#__PURE__*/_react.default.createElement("div", {
+      class: "buttons"
+    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+      class: "up_vote",
+      type: "button"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: _thumbUp.default,
+      alt: "like"
+    })), /*#__PURE__*/_react.default.createElement("div", {
+      class: "upvote_score"
+    }, "Like: ", console.log(topic.upvotes))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+      class: "down_vote",
+      type: "button"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: _thumbDown.default,
+      alt: "dislike"
+    })), /*#__PURE__*/_react.default.createElement("div", {
+      class: "downvote_score"
+    }, "Dislike: ", console.log(topic.downvotes)))));
+  }));
+}
+
+var _default = TopicLists;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","../icons/archive.svg":"icons/archive.svg","../icons/thumbUp.svg":"icons/thumbUp.svg","../icons/thumbDown.svg":"icons/thumbDown.svg","../icons/trash.svg":"icons/trash.svg"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -29927,21 +29965,21 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _TopicLists = _interopRequireDefault(require("../Components/TopicLists"));
-
 var _Form = _interopRequireDefault(require("../Components/Form"));
+
+var _TopicLists = _interopRequireDefault(require("../Components/TopicLists"));
 
 require("../styles.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function App() {
-  return /*#__PURE__*/_react.default.createElement("main", null, /*#__PURE__*/_react.default.createElement(_Form.default, null), /*#__PURE__*/_react.default.createElement(_TopicLists.default, null));
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Form.default, null), /*#__PURE__*/_react.default.createElement(_TopicLists.default, null));
 }
 
 var _default = App;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../Components/TopicLists":"Components/TopicLists.js","../Components/Form":"Components/Form.js","../styles.css":"styles.css"}],"index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../Components/Form":"Components/Form.js","../Components/TopicLists":"Components/TopicLists.js","../styles.css":"styles.css"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -29981,7 +30019,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49463" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55794" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

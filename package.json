@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "browserslist": [
-			"last 1 chrome version"
+			"last 1 chrome versions"
 	],
   "dependencies": {
     "react": "^17.0.1",

@@ -1,14 +1,14 @@
 import React from 'react';
-import TopicLists from "../Components/TopicLists";
 import Form from "../Components/Form"
+import TopicLists from "../Components/TopicLists";
 import "../styles.css";
 
 function App() {
     return (
-        <main>
+        <div>
             <Form />
             <TopicLists />
-        </main>
+        </div>
     )
 }
 
