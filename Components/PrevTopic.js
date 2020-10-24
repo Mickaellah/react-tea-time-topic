@@ -14,7 +14,7 @@ function Topics({ topic }) {
         <article className="card" key={topic.id}>
             <div className="content">
                 <p>{topic.title}</p>
-                <button className="archive" type="button" id={topic.id}>{topic.discussedOn == "" ? <img src={archive} alt="archive" /> : <img src={trash} alt="Delete" />} </button>
+                <button className="archive" onClick={handleDelete} type="button" id={topic.id}>{topic.discussedOn == "" ? <img src={archive} alt="archive" /> : <img src={trash} alt="Delete" />} </button>
             </div>
             <div>
             <p>{original_date}</p>

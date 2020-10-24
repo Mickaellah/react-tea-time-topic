@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import archive from '../icons/archive.svg';
 import thumbUp from '../icons/thumbUp.svg';
 import thumbDown from '../icons/thumbDown.svg';
 import trash from '../icons/trash.svg';
 
 function Topics({ topic }) {
+    const [ count, setCount ] = useState(topic.upvotes);
+    const [ downVotesCount, setDownVotesCount ] = useState(topic.downvotes);
+
+    function upVotesIncreament() {
+        setCount(count + 1);
+    }
+
+    function downVotesIncreament() {
+        setDownVotesCount(downVotesCount + 1);
+    }
+
     return (
         <article className="card" key={topic.id}>
             <div className="content">
@@ -13,12 +24,12 @@ function Topics({ topic }) {
             </div>
             <div className="buttons">
                 <div>
-                    <div className="upvote_score">{topic.upvotes}</div>
-                    <button className="up_vote" type="button"><img src={thumbUp} alt="like" /></button>
+                    <div className="upvote_score">{count}</div>
+                    <button className="up_vote" onClick={upVotesIncreament} type="button"><img src={thumbUp} alt="like" /></button>
                 </div>
                 <div>
-                    <div className="downvote_score">{topic.downvotes}</div>
-                    <button className="down_vote" type="button"><img src={thumbDown} alt="dislike" /></button>
+                    <div className="downvote_score">{downVotesCount}</div>
+                    <button className="down_vote" onClick={downVotesIncreament} type="button"><img src={thumbDown} alt="dislike" /></button>
                 </div>
             </div>
         </article>

@@ -19,6 +19,10 @@ function TopicLists() {
         fetchTopic();
     }, [])
 
+    function UpVoteIncreament() {
+
+    }
+
     const nextTeaTopic = topics.filter((topic) => !topic.discussedOn);
     const prevTopic = topics.filter((topic) => topic.discussedOn);
 
