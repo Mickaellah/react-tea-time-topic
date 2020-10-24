@@ -1,5 +1,5 @@
 body {
-    max-width: 1000px;
+    max-width: 600px;
     margin-inline-start: auto;
     margin-inline-end: auto;
     background-color: aliceblue;
@@ -55,9 +55,9 @@ body {
 
 .up_vote,
 .down_vote {
-    background-color: rgb(158, 123, 110);
+    background-color: #faae2c;
     border: none;
-    border-radius: 5px;
+    border-radius: 50%;
 }
 
 /*# sourceMappingURL=/react-tea-time-topic.e31bb0bc.css.map */

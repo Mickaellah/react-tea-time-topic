@@ -4,32 +4,35 @@ import thumbUp from '../icons/thumbUp.svg';
 import thumbDown from '../icons/thumbDown.svg';
 import trash from '../icons/trash.svg';
 
-function Topics({ topic }) {
-    const [ count, setCount ] = useState(topic.upvotes);
-    const [ downVotesCount, setDownVotesCount ] = useState(topic.downvotes);
-
-    function upVotesIncreament() {
-        setCount(count + 1);
-    }
-
-    function downVotesIncreament() {
-        setDownVotesCount(downVotesCount + 1);
-    }
+function Topics(props) {
 
     return (
-        <article className="card" key={topic.id}>
+        <article className="card" key={props.id}>
             <div className="content">
-                <p>{topic.title}</p>
-                <button className="archive" type="button" id={topic.id}>{topic.discussedOn == "" ? <img src={archive} alt="archive" /> : <img src={trash} alt="Delete" />} </button>
+                <p>{props.title}</p>
+                <button className="archive" type="button" id={props.id}>{props.discussedOn == "" ? <img id={props.id} src={archive} alt="archive" /> : <img src={trash} alt="Delete" />} </button>
             </div>
             <div className="buttons">
                 <div>
-                    <div className="upvote_score">{count}</div>
-                    <button className="up_vote" onClick={upVotesIncreament} type="button"><img src={thumbUp} alt="like" /></button>
+                    <div className="upvote_score">{props.upvotes}</div>
+                    <button 
+                        className="up_vote" 
+                        id={props.id} 
+                        onClick={props.onClick} 
+                        type="button"><img id={props.id} src={thumbUp} alt="like" /></button>
                 </div>
+
                 <div>
-                    <div className="downvote_score">{downVotesCount}</div>
-                    <button className="down_vote" onClick={downVotesIncreament} type="button"><img src={thumbDown} alt="dislike" /></button>
+                    <div className="downvote_score">{props.downvotes}</div>
+                    <button 
+                        className="down_vote" 
+                        id={props.id} 
+                        onClick={props.onChange} 
+                        type="button"><img 
+                        id={props.id}
+                        src={thumbDown} 
+                        alt="dislike" 
+                    /></button>
                 </div>
             </div>
         </article>

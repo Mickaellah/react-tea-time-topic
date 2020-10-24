@@ -4,30 +4,31 @@ import TopicLists from "../Components/TopicLists";
 import "../styles.css";
 
 function App(props) {
-    const [ newTopic, setNewTopic ] = useState('');
+    const [ newTopic, setNewTopic ] = useState({
+        upvotes: 0,
+		downvotes: 0,
+		disussedOn: '',
+		title: '',
+		id: Date.now()
+    });
 
     const handleSubmit = (e) => {
         e.preventDefault();
     }
 
-    const handleChange = (e) => {
-        setNewTopic(e.target.value);
-        console.log(e.target.value);
-    }
-
     const handleAdd = (e) => {
         e.preventDefault();
         const newTopics = props.topics.concat({ newTopic });
-        props.setTopics(newTopics);
-        setNewTopic('');
+        setNewTopic(newTopics);
     }
+
     return (
         <div>
             <Form 
-                onChange={handleChange}
+                onChange={props.handleChange}
                 onSubmit={handleSubmit}
                 onClick={handleAdd}
-                value={props.topics}
+                // value={newTopic}
             />
             <TopicLists />
         </div>

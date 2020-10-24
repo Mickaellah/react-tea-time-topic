@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useImperativeHandle, useState } from 'react';
 import NextTopic from './NextTopics';
 import PastTopics from './PastTopic';
 
@@ -6,25 +6,45 @@ const Topic_url = "https://gist.githubusercontent.com/Pinois/93afbc4a061352a0c70
 
 function TopicLists() {
     const [ topics, setTopics ] = useState([]);
-    console.log(topics);
+    const [ count, setCount ] = useState(0);
+
 
     async function fetchTopic() {
         const res = await fetch(Topic_url);
         const data = await res.json();
-        setTopics(data);
         console.log(data);
+        setTopics(data);
     }
+
+    function upVotesIncreament(e) {
+        const id = e.target.id;
+        console.log(id);
+        const findId = topics.find(item => item.id === id);
+        console.log(findId);
+        const upVotes = findId.upvotes++;
+        setCount(upVotes);
+    }
+
+    function downVotesIncreament(e) {
+        const id = e.target.id;
+        console.log(e.target.id);
+        const findId = topics.find(item => item.id === id);
+        const downVotes = findId.downvotes++;
+        setCount(downVotes);
+    }
+
+    function handleDelete(e) {
+        const id = e.target.id;
+        console.log(id);
+        const deleteItem = topics.filter((item) => item.id !== id);
+        setTopics(deleteItem);
+    }
+
 
     useEffect( () => {
         fetchTopic();
     }, [])
 
-    let nextTeaTopic = topics.filter((topic) => !topic.discussedOn);
-    nextTeaTopic = nextTeaTopic.sort((topicX, topicY) => {
-        const ratioX = topicX.upvotes - topicX.downvotes;
-        const ratioY = topicY.upvotes - topicY.downvotes;
-        return ratioY - ratioX;
-    })
     const pastTopics = topics.filter((topic) => topic.discussedOn);
 
     return (
@@ -33,8 +53,18 @@ function TopicLists() {
                 <h2>Next topics</h2>
             </header>
 
-            { nextTeaTopic.map((topic) => {
-                return <NextTopic key={topic.id} topic={topic} />
+            { topics.sort((topicX, topicY) => {
+                const ratioX = topicX.upvotes - topicX.downvotes;
+                const ratioY = topicY.upvotes - topicY.downvotes;
+                return ratioY - ratioX;
+            }).filter((topic) => !topic.discussedOn).map((topic) => {
+                return <NextTopic 
+                    key={topic.id} 
+                    {...topic} 
+                    onClick={upVotesIncreament} 
+                    onChange={downVotesIncreament}
+                    upVotes={count + topic.upvotes}
+                />
             }) }
 
             <header>
@@ -42,7 +72,7 @@ function TopicLists() {
             </header>
 
             { pastTopics.map((topic) => {
-                return <PastTopics key={topic.id} topic={topic} />
+                return <PastTopics key={topic.id} {...topic} onClick={handleDelete} />
             }) }
         </div>
     )

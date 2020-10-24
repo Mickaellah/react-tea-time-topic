@@ -29791,9 +29791,9 @@ function Form(props) {
   }, /*#__PURE__*/_react.default.createElement("input", {
     className: "add_input",
     type: "text",
-    value: props.value,
     onChange: props.handleChange,
-    placeholder: "Write your topic idea here..."
+    placeholder: "Write your topic idea here...",
+    required: true
   }), /*#__PURE__*/_react.default.createElement("button", {
     className: "submit_bttn",
     onSubmit: props.handleAdd,
@@ -29832,30 +29832,18 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function Topics({
-  topic
-}) {
-  const [count, setCount] = (0, _react.useState)(topic.upvotes);
-  const [downVotesCount, setDownVotesCount] = (0, _react.useState)(topic.downvotes);
-
-  function upVotesIncreament() {
-    setCount(count + 1);
-  }
-
-  function downVotesIncreament() {
-    setDownVotesCount(downVotesCount + 1);
-  }
-
+function Topics(props) {
   return /*#__PURE__*/_react.default.createElement("article", {
     className: "card",
-    key: topic.id
+    key: props.id
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "content"
-  }, /*#__PURE__*/_react.default.createElement("p", null, topic.title), /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("p", null, props.title), /*#__PURE__*/_react.default.createElement("button", {
     className: "archive",
     type: "button",
-    id: topic.id
-  }, topic.discussedOn == "" ? /*#__PURE__*/_react.default.createElement("img", {
+    id: props.id
+  }, props.discussedOn == "" ? /*#__PURE__*/_react.default.createElement("img", {
+    id: props.id,
     src: _archive.default,
     alt: "archive"
   }) : /*#__PURE__*/_react.default.createElement("img", {
@@ -29865,20 +29853,24 @@ function Topics({
     className: "buttons"
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "upvote_score"
-  }, count), /*#__PURE__*/_react.default.createElement("button", {
+  }, props.upvotes), /*#__PURE__*/_react.default.createElement("button", {
     className: "up_vote",
-    onClick: upVotesIncreament,
+    id: props.id,
+    onClick: props.onClick,
     type: "button"
   }, /*#__PURE__*/_react.default.createElement("img", {
+    id: props.id,
     src: _thumbUp.default,
     alt: "like"
   }))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "downvote_score"
-  }, downVotesCount), /*#__PURE__*/_react.default.createElement("button", {
+  }, props.downvotes), /*#__PURE__*/_react.default.createElement("button", {
     className: "down_vote",
-    onClick: downVotesIncreament,
+    id: props.id,
+    onClick: props.onChange,
     type: "button"
   }, /*#__PURE__*/_react.default.createElement("img", {
+    id: props.id,
     src: _thumbDown.default,
     alt: "dislike"
   })))));
@@ -29902,10 +29894,8 @@ var _trash = _interopRequireDefault(require("../icons/trash.svg"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Topics({
-  topic
-}) {
-  const timeStamp = new Date(topic.discussedOn * 1000).getTime();
+function Topics(props) {
+  const timeStamp = new Date(props.discussedOn * 1000).getTime();
   const original_date = new Intl.DateTimeFormat('en-US', {
     year: "numeric",
     month: "short",
@@ -29916,14 +29906,15 @@ function Topics({
   }).format(timeStamp);
   return /*#__PURE__*/_react.default.createElement("article", {
     className: "card",
-    key: topic.id
+    key: props.id
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "content"
-  }, /*#__PURE__*/_react.default.createElement("p", null, topic.title), /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("p", null, props.title), /*#__PURE__*/_react.default.createElement("button", {
     className: "archive",
+    onClick: props.handleDelete,
     type: "button",
-    id: topic.id
-  }, topic.discussedOn == "" ? /*#__PURE__*/_react.default.createElement("img", {
+    id: props.id
+  }, props.discussedOn == "" ? /*#__PURE__*/_react.default.createElement("img", {
     src: _archive.default,
     alt: "archive"
   }) : /*#__PURE__*/_react.default.createElement("img", {
@@ -29954,39 +29945,67 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 const Topic_url = "https://gist.githubusercontent.com/Pinois/93afbc4a061352a0c70331ca4a16bb99/raw/6da767327041de13693181c2cb09459b0a3657a1/topics.json";
 
 function TopicLists() {
   const [topics, setTopics] = (0, _react.useState)([]);
-  console.log(topics);
+  const [count, setCount] = (0, _react.useState)(0);
 
   async function fetchTopic() {
     const res = await fetch(Topic_url);
     const data = await res.json();
-    setTopics(data);
     console.log(data);
+    setTopics(data);
+  }
+
+  function upVotesIncreament(e) {
+    const id = e.target.id;
+    console.log(id);
+    const findId = topics.find(item => item.id === id);
+    console.log(findId);
+    const upVotes = findId.upvotes++;
+    setCount(upVotes);
+  }
+
+  function downVotesIncreament(e) {
+    const id = e.target.id;
+    console.log(e.target.id);
+    const findId = topics.find(item => item.id === id);
+    const downVotes = findId.downvotes++;
+    setCount(downVotes);
+  }
+
+  function handleDelete(e) {
+    const id = e.target.id;
+    console.log(id);
+    const deleteItem = topics.filter(item => item.id !== id);
+    setTopics(deleteItem);
   }
 
   (0, _react.useEffect)(() => {
     fetchTopic();
   }, []);
-  let nextTeaTopic = topics.filter(topic => !topic.discussedOn);
-  nextTeaTopic = nextTeaTopic.sort((topicX, topicY) => {
+  const pastTopics = topics.filter(topic => topic.discussedOn);
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "Next topics")), topics.sort((topicX, topicY) => {
     const ratioX = topicX.upvotes - topicX.downvotes;
     const ratioY = topicY.upvotes - topicY.downvotes;
     return ratioY - ratioX;
-  });
-  const pastTopics = topics.filter(topic => topic.discussedOn);
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "Next topics")), nextTeaTopic.map(topic => {
-    return /*#__PURE__*/_react.default.createElement(_NextTopics.default, {
-      key: topic.id,
-      topic: topic
-    });
+  }).filter(topic => !topic.discussedOn).map(topic => {
+    return /*#__PURE__*/_react.default.createElement(_NextTopics.default, _extends({
+      key: topic.id
+    }, topic, {
+      onClick: upVotesIncreament,
+      onChange: downVotesIncreament,
+      upVotes: count + topic.upvotes
+    }));
   }), /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "Past topics")), pastTopics.map(topic => {
-    return /*#__PURE__*/_react.default.createElement(_PastTopic.default, {
-      key: topic.id,
-      topic: topic
-    });
+    return /*#__PURE__*/_react.default.createElement(_PastTopic.default, _extends({
+      key: topic.id
+    }, topic, {
+      onClick: handleDelete
+    }));
   }));
 }
 
@@ -30087,15 +30106,16 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function App(props) {
-  const [newTopic, setNewTopic] = (0, _react.useState)('');
+  const [newTopic, setNewTopic] = (0, _react.useState)({
+    upvotes: 0,
+    downvotes: 0,
+    disussedOn: '',
+    title: '',
+    id: Date.now()
+  });
 
   const handleSubmit = e => {
     e.preventDefault();
-  };
-
-  const handleChange = e => {
-    setNewTopic(e.target.value);
-    console.log(e.target.value);
   };
 
   const handleAdd = e => {
@@ -30103,15 +30123,14 @@ function App(props) {
     const newTopics = props.topics.concat({
       newTopic
     });
-    props.setTopics(newTopics);
-    setNewTopic('');
+    setNewTopic(newTopics);
   };
 
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Form.default, {
-    onChange: handleChange,
+    onChange: props.handleChange,
     onSubmit: handleSubmit,
-    onClick: handleAdd,
-    value: props.topics
+    onClick: handleAdd // value={newTopic}
+
   }), /*#__PURE__*/_react.default.createElement(_TopicLists.default, null));
 }
 
@@ -30157,7 +30176,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63390" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60654" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
