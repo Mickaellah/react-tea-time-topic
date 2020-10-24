@@ -1,5 +1,5 @@
 body {
-    max-width: 1114px;
+    max-width: 1000px;
     margin-inline-start: auto;
     margin-inline-end: auto;
     background-color: aliceblue;
@@ -28,6 +28,36 @@ body {
     background-color: black;
     color: white;
     text-transform: uppercase;
+}
+
+.card {
+    text-align: center;
+    background-color: white;
+    padding: 32px;
+    margin-block-start: 32px;
+    border-radius: 10px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.archive {
+    background-color: transparent;
+    border: none;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.up_vote,
+.down_vote {
+    background-color: rgb(158, 123, 110);
+    border: none;
+    border-radius: 5px;
 }
 
 /*# sourceMappingURL=/react-tea-time-topic.e31bb0bc.css.map */
