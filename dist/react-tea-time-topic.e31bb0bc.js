@@ -29886,7 +29886,7 @@ function Topics({
 
 var _default = Topics;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../icons/archive.svg":"icons/archive.svg","../icons/thumbUp.svg":"icons/thumbUp.svg","../icons/thumbDown.svg":"icons/thumbDown.svg","../icons/trash.svg":"icons/trash.svg"}],"Components/PrevTopic.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../icons/archive.svg":"icons/archive.svg","../icons/thumbUp.svg":"icons/thumbUp.svg","../icons/thumbDown.svg":"icons/thumbDown.svg","../icons/trash.svg":"icons/trash.svg"}],"Components/PastTopic.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29946,7 +29946,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _NextTopics = _interopRequireDefault(require("./NextTopics"));
 
-var _PrevTopic = _interopRequireDefault(require("./PrevTopic"));
+var _PastTopic = _interopRequireDefault(require("./PastTopic"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29976,14 +29976,14 @@ function TopicLists() {
     const ratioY = topicY.upvotes - topicY.downvotes;
     return ratioY - ratioX;
   });
-  const prevTopic = topics.filter(topic => topic.discussedOn);
+  const pastTopics = topics.filter(topic => topic.discussedOn);
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "Next topics")), nextTeaTopic.map(topic => {
     return /*#__PURE__*/_react.default.createElement(_NextTopics.default, {
       key: topic.id,
       topic: topic
     });
-  }), /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "Past topics")), prevTopic.map(topic => {
-    return /*#__PURE__*/_react.default.createElement(_PrevTopic.default, {
+  }), /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "Past topics")), pastTopics.map(topic => {
+    return /*#__PURE__*/_react.default.createElement(_PastTopic.default, {
       key: topic.id,
       topic: topic
     });
@@ -29992,7 +29992,7 @@ function TopicLists() {
 
 var _default = TopicLists;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./NextTopics":"Components/NextTopics.js","./PrevTopic":"Components/PrevTopic.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./NextTopics":"Components/NextTopics.js","./PastTopic":"Components/PastTopic.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {

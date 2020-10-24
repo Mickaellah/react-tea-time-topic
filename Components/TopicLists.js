@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import NextTopic from './NextTopics';
-import PrevTopic from './PrevTopic';
+import PastTopics from './PastTopic';
 
 const Topic_url = "https://gist.githubusercontent.com/Pinois/93afbc4a061352a0c70331ca4a16bb99/raw/6da767327041de13693181c2cb09459b0a3657a1/topics.json";
 
@@ -25,7 +25,7 @@ function TopicLists() {
         const ratioY = topicY.upvotes - topicY.downvotes;
         return ratioY - ratioX;
     })
-    const prevTopic = topics.filter((topic) => topic.discussedOn);
+    const pastTopics = topics.filter((topic) => topic.discussedOn);
 
     return (
         <div>
@@ -41,8 +41,8 @@ function TopicLists() {
                 <h2>Past topics</h2>
             </header>
 
-            { prevTopic.map((topic) => {
-                return <PrevTopic key={topic.id} topic={topic} />
+            { pastTopics.map((topic) => {
+                return <PastTopics key={topic.id} topic={topic} />
             }) }
         </div>
     )
