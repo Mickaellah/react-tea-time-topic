@@ -5,10 +5,14 @@ import trash from '../icons/trash.svg';
 function Topics({ topic }) {
 
     const timeStamp = new Date(topic.discussedOn * 1000).getTime();
-    const todate = new Date(timeStamp).getDate();
-    const toMonth = new Date(timeStamp).getMonth()+1;
-    const toYear = new Date(timeStamp).getFullYear();
-    const original_date = todate + '/' + toMonth + '/' + toYear;
+    const original_date = new Intl.DateTimeFormat('en-US', {
+        year: "numeric",
+        month: "short",
+        day: "2-digit",
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit"
+    }).format(timeStamp);
 
     return (
         <article className="card" key={topic.id}>
