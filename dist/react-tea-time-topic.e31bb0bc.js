@@ -29911,7 +29911,7 @@ function Topics(props) {
     className: "content"
   }, /*#__PURE__*/_react.default.createElement("p", null, props.title), /*#__PURE__*/_react.default.createElement("button", {
     className: "archive",
-    onClick: props.handleDelete,
+    onClick: props.onClick,
     type: "button",
     id: props.id
   }, props.discussedOn == "" ? /*#__PURE__*/_react.default.createElement("img", {
@@ -30176,7 +30176,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60654" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62823" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

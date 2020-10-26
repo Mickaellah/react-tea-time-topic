@@ -20,7 +20,7 @@ function Topics(props) {
                 <p>{props.title}</p>
                 <button 
                     className="archive" 
-                    onClick={props.handleDelete} 
+                    onClick={props.onClick} 
                     type="button" 
                     id={props.id}>{props.discussedOn == "" ? <img 
                     src={archive} 

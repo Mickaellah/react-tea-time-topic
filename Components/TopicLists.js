@@ -71,7 +71,10 @@ function TopicLists() {
             </header>
 
             { pastTopics.map((topic) => {
-                return <PastTopics key={topic.id} {...topic} onClick={handleDelete} />
+                return <PastTopics 
+                    key={topic.id} {...topic} 
+                    onClick={handleDelete} 
+                />
             }) }
         </div>
     )
