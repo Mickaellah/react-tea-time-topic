@@ -1,13 +1,13 @@
 import React, { useEffect, useImperativeHandle, useState } from 'react';
 import NextTopic from './NextTopics';
 import PastTopics from './PastTopic';
+import Form from './Form';
 
 const Topic_url = "https://gist.githubusercontent.com/Pinois/93afbc4a061352a0c70331ca4a16bb99/raw/6da767327041de13693181c2cb09459b0a3657a1/topics.json";
 
 function TopicLists() {
     const [ topics, setTopics ] = useState([]);
     const [ count, setCount ] = useState(0);
-
 
     async function fetchTopic() {
         const res = await fetch(Topic_url);
@@ -16,11 +16,28 @@ function TopicLists() {
         setTopics(data);
     }
 
+    const handleAdd = (e) => {
+        e.preventDefault();
+        const [ name ] = e.target;
+        e.target.reset();
+
+        const newTopic = {
+            upvotes: 0,
+            downvotes: 0,
+            disussedOn: '',
+            title: name.value,
+            id: Date.now()
+        }
+
+        topics.push(newTopic);
+        console.log(newTopic);
+        setTopics([...topics]);
+    }
+
+
     function upVotesIncreament(e) {
         const id = e.target.id;
-        console.log(id);
         const findId = topics.find(item => item.id === id);
-        console.log(findId);
         const upVotes = findId.upvotes++;
         setCount(upVotes);
     }
@@ -39,6 +56,14 @@ function TopicLists() {
         setTopics(deleteItem);
     }
 
+    function handleArchive(e) {
+        const id = e.target.id;
+        const topicToArchive = topics.filter((topic) => topic.id === id);
+        topicToArchive.discussedOn = new Date();
+        console.log(topicToArchive);
+        setTopics(topicToArchive);
+    }
+
 
     useEffect( () => {
         fetchTopic();
@@ -48,6 +73,7 @@ function TopicLists() {
 
     return (
         <div>
+            <Form onClick={handleAdd} />
             <header>
                 <h2>Next topics</h2>
             </header>
@@ -63,6 +89,7 @@ function TopicLists() {
                     onClick={upVotesIncreament} 
                     onChange={downVotesIncreament}
                     upVotes={count + topic.upvotes}
+                    handleArchive={handleArchive}
                 />
             }) }
 

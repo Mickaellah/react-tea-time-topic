@@ -6,9 +6,15 @@ export default function Form(props) {
             <header>
                 <h2>Add a topic</h2>
             </header>
-            <form className="add_form" onSubmit={props.handleSubmit}>
-                <input className="add_input" type="text" onChange={props.handleChange} placeholder="Write your topic idea here..." required />
-                <button className="submit_bttn" onSubmit={props.handleAdd} type="submit">Submit</button>
+            <form className="add_form" onSubmit={props.onClick}>
+                <input 
+                    className="add_input" 
+                    type="text" 
+                    name="newTopic" 
+                    placeholder="Write your topic idea here..."
+                    required 
+                />
+                <button className="submit_bttn" type="submit">Submit</button>
             </form>
         </>
     )

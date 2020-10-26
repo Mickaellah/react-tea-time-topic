@@ -10,7 +10,18 @@ function Topics(props) {
         <article className="card" key={props.id}>
             <div className="content">
                 <p>{props.title}</p>
-                <button className="archive" type="button" id={props.id}>{props.discussedOn == "" ? <img id={props.id} src={archive} alt="archive" /> : <img src={trash} alt="Delete" />} </button>
+                <button 
+                    className="archive" 
+                    onClick={props.handleArchive} 
+                    type="button" 
+                    id={props.id}>{props.discussedOn == "" ? <img 
+                    id={props.id} 
+                    src={archive} 
+                    alt="archive" /> : <img 
+                    src={trash} 
+                    id={props.id} 
+                    alt="Delete" />} 
+                </button>
             </div>
             <div className="buttons">
                 <div>

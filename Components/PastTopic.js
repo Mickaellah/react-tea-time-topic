@@ -24,6 +24,7 @@ function Topics(props) {
                     type="button" 
                     id={props.id}>{props.discussedOn == "" ? <img 
                     src={archive} 
+                    id={props.id}
                     alt="archive" /> : <img 
                     id={props.id} 
                     src={trash} 
