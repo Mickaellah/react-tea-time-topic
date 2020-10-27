@@ -30004,23 +30004,24 @@ function TopicLists() {
 
   function handleArchive(e) {
     const id = e.target.id;
-    const topicToArchive = topics.filter(topic => topic.id === id);
+    const topicToArchive = topics.find(topic => topic.id === id);
     topicToArchive.discussedOn = new Date();
     console.log(topicToArchive);
-    setTopics(topicToArchive);
+    setTopics([...topics]);
   }
 
   (0, _react.useEffect)(() => {
     fetchTopic();
   }, []);
-  const pastTopics = topics.filter(topic => topic.discussedOn);
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Form.default, {
-    onClick: handleAdd
-  }), /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "Next topics")), topics.sort((topicX, topicY) => {
+  const sortedTopic = topics.sort((topicX, topicY) => {
     const ratioX = topicX.upvotes - topicX.downvotes;
     const ratioY = topicY.upvotes - topicY.downvotes;
     return ratioY - ratioX;
-  }).filter(topic => !topic.discussedOn).map(topic => {
+  });
+  const filteredTopic = sortedTopic.filter(topic => !topic.discussedOn);
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Form.default, {
+    onClick: handleAdd
+  }), /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "Next topics")), filteredTopic.map(topic => {
     return /*#__PURE__*/_react.default.createElement(_NextTopics.default, _extends({
       key: topic.id
     }, topic, {
@@ -30029,7 +30030,7 @@ function TopicLists() {
       upVotes: count + topic.upvotes,
       handleArchive: handleArchive
     }));
-  }), /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "Past topics")), pastTopics.map(topic => {
+  }), /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "Past topics")), topics.filter(topic => topic.discussedOn).map(topic => {
     return /*#__PURE__*/_react.default.createElement(_PastTopic.default, _extends({
       key: topic.id
     }, topic, {
@@ -30179,7 +30180,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51451" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52810" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

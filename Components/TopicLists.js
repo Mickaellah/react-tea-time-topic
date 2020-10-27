@@ -58,10 +58,10 @@ function TopicLists() {
 
     function handleArchive(e) {
         const id = e.target.id;
-        const topicToArchive = topics.filter((topic) => topic.id === id);
+        const topicToArchive = topics.find((topic) => topic.id === id);
         topicToArchive.discussedOn = new Date();
         console.log(topicToArchive);
-        setTopics(topicToArchive);
+        setTopics([...topics]);
     }
 
 
@@ -69,7 +69,13 @@ function TopicLists() {
         fetchTopic();
     }, [])
 
-    const pastTopics = topics.filter((topic) => topic.discussedOn);
+    const sortedTopic = topics.sort((topicX, topicY) => {
+        const ratioX = topicX.upvotes - topicX.downvotes;
+        const ratioY = topicY.upvotes - topicY.downvotes;
+        return ratioY - ratioX;
+    });
+
+    const filteredTopic = sortedTopic.filter((topic) => !topic.discussedOn);
 
     return (
         <div>
@@ -78,11 +84,7 @@ function TopicLists() {
                 <h2>Next topics</h2>
             </header>
 
-            { topics.sort((topicX, topicY) => {
-                const ratioX = topicX.upvotes - topicX.downvotes;
-                const ratioY = topicY.upvotes - topicY.downvotes;
-                return ratioY - ratioX;
-            }).filter((topic) => !topic.discussedOn).map((topic) => {
+            { filteredTopic.map((topic) => {
                 return <NextTopic 
                     key={topic.id} 
                     {...topic} 
@@ -97,7 +99,7 @@ function TopicLists() {
                 <h2>Past topics</h2>
             </header>
 
-            { pastTopics.map((topic) => {
+            { topics.filter((topic) => topic.discussedOn).map((topic) => {
                 return <PastTopics 
                     key={topic.id} {...topic} 
                     onClick={handleDelete} 
