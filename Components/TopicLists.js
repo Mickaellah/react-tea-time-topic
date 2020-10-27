@@ -8,6 +8,7 @@ const Topic_url = "https://gist.githubusercontent.com/Pinois/93afbc4a061352a0c70
 function TopicLists() {
     const [ topics, setTopics ] = useState([]);
     const [ count, setCount ] = useState(0);
+    const [ newTopics, setNewTopics ] = useState(''); 
 
     async function fetchTopic() {
         const res = await fetch(Topic_url);
@@ -16,16 +17,20 @@ function TopicLists() {
         setTopics(data);
     }
 
+    const handleChange = (e) => {
+        setNewTopics(e.target.value)
+    }
+
     const handleAdd = (e) => {
         e.preventDefault();
-        const [ name ] = e.target;
+        const inputValue = e.currentTarget.newTopic.value;
         e.target.reset();
 
         const newTopic = {
             upvotes: 0,
             downvotes: 0,
             disussedOn: '',
-            title: name.value,
+            title: inputValue,
             id: Date.now()
         }
 
@@ -37,14 +42,14 @@ function TopicLists() {
 
     function upVotesIncreament(e) {
         const id = e.target.id;
-        const findId = topics.find(item => item.id === id);
+        const findId = topics.find(item => item.id == id);
         const upVotes = findId.upvotes++;
         setCount(upVotes);
     }
 
     function downVotesIncreament(e) {
         const id = e.target.id;
-        const findId = topics.find(item => item.id === id);
+        const findId = topics.find(item => item.id == id);
         const downVotes = findId.downvotes++;
         setCount(downVotes);
     }
@@ -52,13 +57,13 @@ function TopicLists() {
     function handleDelete(e) {
         const id = e.target.id;
         console.log(id);
-        const deleteItem = topics.filter((item) => item.id !== id);
+        const deleteItem = topics.filter((item) => item.id != id);
         setTopics(deleteItem);
     }
 
     function handleArchive(e) {
         const id = e.target.id;
-        const topicToArchive = topics.find((topic) => topic.id === id);
+        const topicToArchive = topics.find((topic) => topic.id == id);
         topicToArchive.discussedOn = new Date();
         console.log(topicToArchive);
         setTopics([...topics]);
@@ -79,7 +84,7 @@ function TopicLists() {
 
     return (
         <div>
-            <Form onClick={handleAdd} />
+            <Form onClick={handleAdd} value={newTopics} onChange={handleChange} name="newTopic" />
             <header>
                 <h2>Next topics</h2>
             </header>

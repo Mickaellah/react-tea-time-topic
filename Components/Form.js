@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Form(props) {
     return (
@@ -10,7 +10,9 @@ export default function Form(props) {
                 <input 
                     className="add_input" 
                     type="text" 
-                    name="newTopic" 
+                    name='newTopic'
+                    value={props.value}
+                    onChange={props.onChange}
                     placeholder="Write your topic idea here..."
                     required 
                 />

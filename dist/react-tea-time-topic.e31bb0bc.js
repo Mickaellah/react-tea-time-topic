@@ -29909,9 +29909,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Form;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function Form(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "Add a topic")), /*#__PURE__*/_react.default.createElement("form", {
@@ -29921,6 +29923,8 @@ function Form(props) {
     className: "add_input",
     type: "text",
     name: "newTopic",
+    value: props.value,
+    onChange: props.onChange,
     placeholder: "Write your topic idea here...",
     required: true
   }), /*#__PURE__*/_react.default.createElement("button", {
@@ -29957,6 +29961,7 @@ const Topic_url = "https://gist.githubusercontent.com/Pinois/93afbc4a061352a0c70
 function TopicLists() {
   const [topics, setTopics] = (0, _react.useState)([]);
   const [count, setCount] = (0, _react.useState)(0);
+  const [newTopics, setNewTopics] = (0, _react.useState)('');
 
   async function fetchTopic() {
     const res = await fetch(Topic_url);
@@ -29965,15 +29970,19 @@ function TopicLists() {
     setTopics(data);
   }
 
+  const handleChange = e => {
+    setNewTopics(e.target.value);
+  };
+
   const handleAdd = e => {
     e.preventDefault();
-    const [name] = e.target;
+    const inputValue = e.currentTarget.newTopic.value;
     e.target.reset();
     const newTopic = {
       upvotes: 0,
       downvotes: 0,
       disussedOn: '',
-      title: name.value,
+      title: inputValue,
       id: Date.now()
     };
     topics.push(newTopic);
@@ -29983,14 +29992,14 @@ function TopicLists() {
 
   function upVotesIncreament(e) {
     const id = e.target.id;
-    const findId = topics.find(item => item.id === id);
+    const findId = topics.find(item => item.id == id);
     const upVotes = findId.upvotes++;
     setCount(upVotes);
   }
 
   function downVotesIncreament(e) {
     const id = e.target.id;
-    const findId = topics.find(item => item.id === id);
+    const findId = topics.find(item => item.id == id);
     const downVotes = findId.downvotes++;
     setCount(downVotes);
   }
@@ -29998,13 +30007,13 @@ function TopicLists() {
   function handleDelete(e) {
     const id = e.target.id;
     console.log(id);
-    const deleteItem = topics.filter(item => item.id !== id);
+    const deleteItem = topics.filter(item => item.id != id);
     setTopics(deleteItem);
   }
 
   function handleArchive(e) {
     const id = e.target.id;
-    const topicToArchive = topics.find(topic => topic.id === id);
+    const topicToArchive = topics.find(topic => topic.id == id);
     topicToArchive.discussedOn = new Date();
     console.log(topicToArchive);
     setTopics([...topics]);
@@ -30020,7 +30029,10 @@ function TopicLists() {
   });
   const filteredTopic = sortedTopic.filter(topic => !topic.discussedOn);
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Form.default, {
-    onClick: handleAdd
+    onClick: handleAdd,
+    value: newTopics,
+    onChange: handleChange,
+    name: "newTopic"
   }), /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "Next topics")), filteredTopic.map(topic => {
     return /*#__PURE__*/_react.default.createElement(_NextTopics.default, _extends({
       key: topic.id
