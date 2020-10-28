@@ -17,9 +17,9 @@ function Topics(props) {
     return (
         <article className="card" key={props.id}>
             <div className="content">
-                <p>{props.title}</p>
+                <p className="title">{props.title}</p>
                 <button 
-                    className="archive" 
+                    className="delete" 
                     onClick={props.onClick} 
                     type="button" 
                     id={props.id}>{props.discussedOn == "" ? <img 
@@ -32,7 +32,7 @@ function Topics(props) {
                 />} </button>
             </div>
             <div>
-            <p>{original_date}</p>
+            <p className="discussedOn">Discussed on {original_date}</p>
             </div>
         </article>
     )

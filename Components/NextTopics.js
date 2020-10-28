@@ -9,7 +9,7 @@ function Topics(props) {
     return (
         <article className="card" key={props.id}>
             <div className="content">
-                <p>{props.title}</p>
+                <p className="title">{props.title}</p>
                 <button 
                     className="archive" 
                     onClick={props.handleArchive} 

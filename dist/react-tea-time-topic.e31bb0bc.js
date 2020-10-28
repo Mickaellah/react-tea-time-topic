@@ -29810,7 +29810,9 @@ function Topics(props) {
     key: props.id
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "content"
-  }, /*#__PURE__*/_react.default.createElement("p", null, props.title), /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("p", {
+    className: "title"
+  }, props.title), /*#__PURE__*/_react.default.createElement("button", {
     className: "archive",
     onClick: props.handleArchive,
     type: "button",
@@ -29883,8 +29885,10 @@ function Topics(props) {
     key: props.id
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "content"
-  }, /*#__PURE__*/_react.default.createElement("p", null, props.title), /*#__PURE__*/_react.default.createElement("button", {
-    className: "archive",
+  }, /*#__PURE__*/_react.default.createElement("p", {
+    className: "title"
+  }, props.title), /*#__PURE__*/_react.default.createElement("button", {
+    className: "delete",
     onClick: props.onClick,
     type: "button",
     id: props.id
@@ -29896,7 +29900,9 @@ function Topics(props) {
     id: props.id,
     src: _trash.default,
     alt: "Delete"
-  }), " ")), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, original_date)));
+  }), " ")), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", {
+    className: "discussedOn"
+  }, "Discussed on ", original_date)));
 }
 
 var _default = Topics;
@@ -30125,7 +30131,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"pages/App.js":[function(require,module,exports) {
+},{"./fonts\\woff\\Roboto-Regular.woff2":[["Roboto-Regular.fbe9bbd0.woff2","fonts/woff/Roboto-Regular.woff2"],"fonts/woff/Roboto-Regular.woff2"],"./fonts\\woff\\Roboto-Regular.woff":[["Roboto-Regular.322287be.woff","fonts/woff/Roboto-Regular.woff"],"fonts/woff/Roboto-Regular.woff"],"_css_loader":"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"pages/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30192,7 +30198,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52810" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50797" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

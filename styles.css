@@ -1,8 +1,25 @@
+@font-face {
+    font-family: 'Roboto';
+    font-weight: 400;
+    src: url('./fonts/woff/Roboto-Regular.woff2') format('woff2'),
+        url('./fonts/woff/Roboto-Regular.woff') format('woff');
+}
+
 body {
-    max-width: 600px;
+    font-family: 'Roboto';
+    max-width: 700px;
     margin-inline-start: auto;
     margin-inline-end: auto;
     background-color: aliceblue;
+}
+
+h1 {
+    font-size: 64px;
+}
+
+h2 {
+    text-transform: uppercase;
+    font-size: 14px;
 }
 
 .add_form {
@@ -31,6 +48,7 @@ body {
 }
 
 .card {
+    position: relative;
     text-align: center;
     background-color: white;
     padding: 32px;
@@ -38,12 +56,18 @@ body {
     border-radius: 10px;
 }
 
-.content {
-    display: flex;
-    justify-content: space-between;
+.title {
+    max-width: 500px;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    font-size: 24px;
+    margin-block-start: 0;
 }
 
 .archive {
+    position: absolute;
+    top: 10%;
+    left: 93%;
     background-color: transparent;
     border: none;
 }
@@ -58,4 +82,23 @@ body {
     background-color: #faae2c;
     border: none;
     border-radius: 50%;
+}
+
+.upvote_score,
+.downvote_score {
+    font-size: 24px;
+    color: rgba(216, 119, 154, 1);
+}
+
+.delete {
+    position: absolute;
+    top: 10%;
+    left: 92%;
+    border: none;
+    background-color: transparent;
+}
+
+.discussedOn {
+    color: #faae2c;
+    font-size: 12px;
 }
