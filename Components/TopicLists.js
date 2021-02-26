@@ -34,9 +34,8 @@ function TopicLists() {
             id: Date.now()
         }
 
-        topics.push(newTopic);
         console.log(newTopic);
-        setTopics([...topics]);
+        setTopics([...topics, newTopic]);
     }
 
 
@@ -84,6 +83,7 @@ function TopicLists() {
 
     return (
         <div>
+            {!topics.length && "Loading..."}
             <Form onClick={handleAdd} value={newTopics} onChange={handleChange} name="newTopic" />
             <header>
                 <h2>Next topics</h2>
